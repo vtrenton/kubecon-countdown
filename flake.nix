@@ -17,8 +17,9 @@
         buildInputs = [ pkgs.go ];
 
         buildPhase = ''
+          export CGO_ENABLED=0
           export GOCACHE=$(mktemp -d)
-          go build -o kubecon kubecon.go
+          go build -ldflags="-s -w" -o kubecon kubecon.go
         '';
 
         installPhase = ''
@@ -29,8 +30,9 @@
         meta = with pkgs.lib; {
           description = "A simple Go application for Kubernetes";
           license = licenses.mit;
-          maintainers = [ "YourName" ];
+          maintainers = [ "vtrenton" ];
         };
       };
     };
 }
+

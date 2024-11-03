@@ -14,6 +14,9 @@ RUN nix --extra-experimental-features "nix-command flakes" build .#kubecon -o ku
 # Switch to a minimal scratch image
 FROM scratch
 
+# Expose port 8080 for HTTP requests
+EXPOSE 8080
+
 # Copy the binary from the previous build
 COPY --from=0 /app/kubecon /kubecon
 
